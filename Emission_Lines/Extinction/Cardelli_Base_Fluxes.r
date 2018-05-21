@@ -326,8 +326,6 @@ for (ww in 1:length(X2)){
 
 }
 
-
-
 ##############################################################################
 ##Save data to files
 print('Saving fluxes to data file.')
