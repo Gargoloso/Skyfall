@@ -137,7 +137,7 @@ k_l2 <- (2.659*(-1.857+(1.040/l)))+Rv #For 0.63 to 2.20 micrometres.
 
 Rab <- (fa/fb)/2.86 #Ratio of attenuated Halpha/Hbeta over non-attenuated one.
 
-EBV <- (0.4*1.163)*(log10(10)/log10(Rab)) #Colour excess E(B-V) in magnitudes.
+EBV <- log10(Rab)/(0.4*1.163) #Colour excess E(B-V) in magnitudes.
 
 Fa  <-  fa*10^(0.4*EBV*k_l2[1]) #H-alpha dereddening
 Fb  <-  fb*10^(0.4*EBV*k_l1[4]) #H-beta dereddening
