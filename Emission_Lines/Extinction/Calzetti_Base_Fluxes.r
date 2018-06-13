@@ -72,7 +72,7 @@ attach(DATA)
 ##Extracting coordinates from ID
 
 print('Extracting spaxels IDs.')
-id <-    id[which(fluxha!=500)]
+ID <- id[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)]
 
 ##Extracting line surface specific fluxes [1e-16 erg cm^-2 s^-1 A^-1 arcsec^-2]
 
@@ -80,27 +80,27 @@ print('Extracting emission lines.')
 
 #H-alpha 6563
 print('Extracting H-alpha.')
-fa <-    fluxha[which(fluxha!=500)] #Obtaining the H-alpha surface specific flux.
+fa <-    fluxha[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3  & snha >= 3)] #Obtaining the H-alpha surface specific flux.
 
 #[N II] 6548
 print('Extracting [N II] 6548')
-fn1 <-   fluxnii1[which(fluxha!=500)] #Obtaining the  [N II] 6548 surface specific flux.
+fn1 <-   fluxnii1[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)] #Obtaining the  [N II] 6548 surface specific flux.
  
 #[N II] 6583
 print('Extracting [N II] 6583.')
-fn <-    fluxnii2[which(fluxha!=500)] #Obtaining the[N II] surface specific flux.
+fn <-    fluxnii2[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)] #Obtaining the[N II] surface specific flux.
 
 #H-beta 4861
 print('Extracting H-beta.')
-fb <-    fluxhb[which(fluxha!=500)] #Obtaining the[H-beta] surface specific flux.
+fb <-   fluxhb[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)] #Obtaining the[H-beta] surface specific flux.
 
 #[O III] 4959
 print('Extracting [O III] 4959')
-fo1 <-   fluxoiii1[which(fluxha!=500)] #Obtaining the [O III] 4959 surface specific flux.
+fo1 <-   fluxoiii1[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)] #Obtaining the [O III] 4959 surface specific flux.
 
 #[O III] 5007
 print('Extracting [O III] 5007.')
-fo <-    fluxoiii2[which(fluxha!=500)] #Obtaining the [O III] 5007 surface specific flux.
+fo <-    fluxoiii2[which(fluxha!=500 & !is.na(fluxha) & !is.na(fluxnii1) & !is.na(fluxnii2) & !is.na(fluxoiii1) & !is.na(fluxoiii2) & snhb >= 3 & snha >= 3)] #Obtaining the [O III] 5007 surface specific flux.
 
 ##Convert from surface specific flux. to standard specific intensity [erg cm^-2 s^-1 A^-1 sr^-1]
 
@@ -152,7 +152,7 @@ AHa <- k_l2[1]*EBV #H-alpha extinction (in magnitudes)
 ##Save data to files
 
 print('Saving fluxes to data file.')
-resume <- data.frame(id,AHa,EBV,Fa,Fb,Fn1,Fn,Fo1,Fo)
+resume <- data.frame(ID,AHa,EBV,Fa,Fb,Fn1,Fn,Fo1,Fo)
 tabla <- str_c(galaxy[i],"/Calzetti_Base_Fluxes.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
