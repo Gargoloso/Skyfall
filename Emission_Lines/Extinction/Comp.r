@@ -82,7 +82,7 @@ for(i in 1:length(galaxy)){
   
   #Saving plot.
   
-  map <- str_c(galaxy[i],"/",galaxy[i],"Comp_AHa.eps")
+  map <- str_c(galaxy[i],"/",galaxy[i],"_Comp_AHa.eps")
   dev.copy2eps(file=map)
   map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_Comp_AHa.eps ",galaxy[i],"/",galaxy[i],"_Comp_AHa.png")
   system(map)

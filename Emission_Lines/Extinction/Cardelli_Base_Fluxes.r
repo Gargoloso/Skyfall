@@ -2,14 +2,14 @@
 #############################################################################
 
 ##   This calculates extinction corrected fluxes using the Cardelli        ##
-##   extinction law.                                                       ##    
+##   extinction law. (Cardelli et al. 1989)                                ##    
 
 ##   February 25, 2018 A. Robleto-Orús                                     ##
 ##   May 15, 2018 Adapted to work with the last version of fitlines.       ##
 ##                We now only save the final surface specific fluxes but   ##
 ##                not line ratios. Also Cbeta and AHa are saved.           ##
 ##   June 10, 2018 Optimized.                                              ##
-
+##   June 15, 2018 Added error estimation as in Arellano-Cordova (2015)    ##
 #############################################################################
 #############################################################################
 

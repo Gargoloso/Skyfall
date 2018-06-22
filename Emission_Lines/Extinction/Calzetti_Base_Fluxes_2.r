@@ -226,7 +226,7 @@ rms_AHa <- k_l2[1]*rms_EBV
 
 print('Saving fluxes to data file.')
 #resume <- data.frame(ID,AHa,EBV,Fa,Fb,Fn1,Fn,Fo1,Fo)
-resume <- data.frame(ID,AHa,rms_AHa,Fa,rms_Fa,Fb,rms_Fb,Fn1,rms_Fn1,Fn,rms_Fn,Fo1,rms_Fo1,Fo,rms_Fo)
+resume <- data.frame(ID,AHa,EBV,rms_EBV,rms_AHa,Fa,rms_Fa,Fb,rms_Fb,Fn1,rms_Fn1,Fn,rms_Fn,Fo1,rms_Fo1,Fo,rms_Fo)
 tabla <- str_c(galaxy[i],"/Calzetti_Base_Fluxes.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 

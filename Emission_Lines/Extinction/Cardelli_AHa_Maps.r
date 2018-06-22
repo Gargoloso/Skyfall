@@ -63,8 +63,8 @@ for(i in 1:length(galaxy)){
   attach(data0)
   
 
-  y <-  (trunc(ID[which(AHa >= 0 & AHa <= 20 & !is.na(AHa))]/100)  ) #Obtaining Y from id.
-  x <-  (ID[which(AHa >= 0 & AHa <= 20 & !is.na(AHa))]-(y*100) ) #Obtaining X from id.
+  y <-  (trunc(ID[which(AHa >= 0 & AHa <= 4 & !is.na(AHa))]/100)  ) #Obtaining Y from id.
+  x <-  (ID[which(AHa >= 0 & AHa <= 4 & !is.na(AHa))]-(y*100) ) #Obtaining X from id.
   
   ##id of central spaxel
   print('Determining central spaxel postion.')
@@ -76,7 +76,7 @@ for(i in 1:length(galaxy)){
   
   #x <- match(Cardelli_id,Calzetti_id)
   
-  Cardelli_AHa <- AHa[which(AHa >= 0 & AHa <= 20 & !is.na(AHa))]
+  Cardelli_AHa <- AHa[which(AHa >= 0 & AHa <= 4 & !is.na(AHa))]
  
   ##########################################################################
   ##H-alpha Map
