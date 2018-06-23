@@ -76,19 +76,24 @@ for(i in 1:length(galaxy)){
   
   #x <- match(Cardelli_id,Calzetti_id)
   
-  Cardelli_AHa <- AHa[which(AHa >= 0 & AHa <= 4 & !is.na(AHa))]
+  Cardelli_AHa <- c(AHa[which(AHa >= 0 & AHa <= 4 & !is.na(AHa))],0,4)
+  x2 <- c(x,-1000,1000)
+  y2 <- c(y,-1000,1000)
  
   ##########################################################################
   ##H-alpha Map
   
   print('Plotting H-alpha luminosity map.')
   
+  par(mar=c(5,5,4.75,4.75))
+  par(bg='white')
+  
   ## Specify color map for z.
   
   rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
   Col <- rbPal(100)[as.numeric(cut(Cardelli_AHa,breaks = 100))]
   
-  plot(x,y,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = galaxy[i],xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
+  plot(x2,y2,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = galaxy[i],xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
   #rasterImage(ima,-40,-40,40,40,interpolate=F)
   points(x,y, col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
   grid() #Coordinates'grid.
