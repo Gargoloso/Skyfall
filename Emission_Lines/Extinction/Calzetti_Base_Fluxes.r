@@ -22,9 +22,9 @@ require("stringr")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) #File with general info of each galaxy.
 attach(data)
 
 galaxy <- as.character(name)
@@ -56,11 +56,11 @@ print('****************************')
 ##Load data
 
 print('Extracting H-alpha and [N II] 6583  data.')  
-path_ha <- str_c(galaxy[i],"/lis_ha.res") #creates path to Ha and [N II] data file for each galaxy
+path_ha <- str_c(---,"/lis_ha.res") #Creates path to Ha and [N II] data file for each galaxy
 data0 <- read.table(path_ha, header=TRUE)
 
 print('Extracting H-beta and [O III] 5007 data.')
-path_hb <- str_c(galaxy[i],"/lis_hb.res") #creates path to H-beta and [OIII] data file for each galaxy
+path_hb <- str_c(---,"/lis_hb.res") #Creates path to H-beta and [OIII] data file for each galaxy
 data3 <- read.table(path_hb, header=TRUE)
          
 ##Merge data
@@ -226,9 +226,8 @@ rms_AHa <- k_l2[1]*rms_EBV
 ##Save data to files
 
 print('Saving fluxes to data file.')
-#resume <- data.frame(ID,AHa,EBV,Fa,Fb,Fn1,Fn,Fo1,Fo)
 resume <- data.frame(ID,AHa,EBV,rms_EBV,rms_AHa,Fa,rms_Fa,Fb,rms_Fb,Fn1,rms_Fn1,Fn,rms_Fn,Fo1,rms_Fo1,Fo,rms_Fo)
-tabla <- str_c(galaxy[i],"/Calzetti_Base_Fluxes.dat")
+tabla <- str_c(---,"/Calzetti_Base_Fluxes.dat") #Directory and name of saved data file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
