@@ -2,8 +2,11 @@
 #########################################################################
 
 
-##	This programs finds draws BPT diagrams for all galaxies. 
-##	02/23/2017 by A. Robleto-Orus
+##	This programs finds draws BPT diagrams  and maps for all galaxies. ##
+
+##	02/23/2017 by A. Robleto-Orus                                      ##
+##  05/25/2018 adapted for new generation (Skyfall) scripts with error ##
+##             propagation.                                            ##
 
 #########################################################################
 #########################################################################
@@ -71,39 +74,33 @@ attach(data1)
 
 print('EXTRACTING DESyDENED LINE SURFACE SPECIFIC FLUXES')
 
-# & rms_Fo/Fo <= 0.1 & rms_Fn/Fn <= 0.1
-##Extracting coordinates from ID
+## Extracting coordinates from ID
 ## Spaxel's coordinates are in the id in format YYXX, with Y = DEC and X = RA.
-#y <- (trunc(ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]/100)  ) #Obtaining Y from id.
-#x <- (ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]-(y*100)) #Obtaining X from id.
-y <- trunc(ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]/100)
-x <- ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]-(y*100)
 
-#ID2 <- ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-ID2 <- ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
+y <- trunc(ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]/100) # y coordinate.
+x <- ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]-(y*100) # x coordinate.
 
-#FA <- Fa[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-#rms_FA <- rms_Fa[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
+ID2 <- ID[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)] # ID of each spectra.
 
-FA <- Fa[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
+## Extracting dereddenend surface specific fluxes and rms [erg s^-1 cm^-2 arcsec^-2].
+
+# H-alpha.
+FA <- Fa[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)] 
 rms_FA <- rms_Fa[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
 
-#FB <- Fb[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-#rms_Fb <- rms_Fb[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-FB <- Fb[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
+# H-beta.
+FB <- Fb[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)] #H-beta flux.
 rms_FB <- rms_Fb[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
 
-#FN <- Fn[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-#rms_FN <- rms_Fn[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
+# [N II] 6583
 FN <- Fn[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
 rms_FN <- rms_Fn[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
 
-#FO <- Fo[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
-#rms_FO <- rms_Fo[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4 & !is.na(Fa) & !is.na(rms_Fa) & !is.na(Fb) & !is.na(rms_Fb) & !is.na(Fn) & !is.na(rms_Fn) & !is.na(Fo) & !is.na(rms_Fo))]
+# [O III] 5007
 FO <- Fo[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]
 rms_FO <- rms_Fo[which(!is.na(AHa) & !is.na(rms_AHa) & AHa <= 4)]               
 
-# Origin to the field centre.
+# Translation of coordinates setting origin to the field centre.
 Y <- y - yc
 X <- x - xc
 
@@ -116,18 +113,21 @@ X <- x - xc
 ########################################################################
 
 print('CALCULATING LINE RATIOS')
+## Note: rms are calculated from the non-logarythmic line ratios and 
+# applying logarythm after error propagation. Direct logarythmic propagation
+# should be on the form: #rms_na1 <- sqrt(((1/(FN*log(10)))*rms_FN)^2 + ((-1/(FA*log(10)))*rms_FA)^2)
 
 #[N II]6584 / H-alpha
 na1 <- log10(FN/FA)
 rms_na2 <- sqrt(((1/FA)*rms_FN)^2 + ((-FN/(FA^2))*rms_FA)^2)
 rms_na3 <- log10(rms_na2)
-#rms_na1 <- sqrt(((1/(FN*log(10)))*rms_FN)^2 + ((-1/(FA*log(10)))*rms_FA)^2)
 
 #[O III] 5007 / H-beta
 ob1 <- log10(FO/FB)
-#rms_ob1 <- sqrt(((1/(FO*log(10)))*rms_FO)^2 + ((-1/(FB*log(10)))*rms_FB)^2)
 rms_ob2 <- sqrt(((1/FB)*rms_FO)^2 + ((-FO/(FB^2))*rms_FB)^2)
 rms_ob3 <- log10(rms_ob2)
+
+## Filtering out NAs.
 
 na     <- na1[which(!is.na(na1) & !is.na(ob1))]
 rms_na <- rms_na3[which(!is.na(na1) & !is.na(ob1))]
@@ -243,7 +243,7 @@ map <- str_c("convert -density 300  ",galaxy[i],"/",galaxy[i],"_BPT_NII_Map.eps 
 system(map)
 
 ##############################################################################
-##Save data to files
+##Save data to files.
 
 print('Saving line ratios and BPT types to data file.')
 resume <- data.frame(ID2, na, rms_na, ob, rms_ob, type)
@@ -261,7 +261,7 @@ tot[i] <- nSy[i] + nSF[i] + nTO[i] + nAn[i]
 }
 
 ##############################################################################
-##Save data to files
+##Save summary data to a file.
 
 Cuentas <- data.frame(galaxy,nSy,nSF,nTO,nAn, tot)
 tabla <- str_c('BPT-NII_SpaxCount.dat')
