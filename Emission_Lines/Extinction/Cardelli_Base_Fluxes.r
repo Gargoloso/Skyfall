@@ -31,9 +31,9 @@ require("stringr")
 
 ##################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data.
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) #File with general info for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
@@ -65,11 +65,11 @@ print('****************************')
 ##Load data.
 
 print('Extracting H-alpha and [N II] 6583  data.')  
-path_ha <- str_c(galaxy[i],"/lis_ha.res") #creates path to Ha and [N II] data file for each galaxy.
+path_ha <- str_c(---,"/lis_ha.res") #creates path to Ha and [N II] data file for each galaxy.
 data0 <- read.table(path_ha, header=TRUE)
 
 print('Extracting H-beta and [O III] 5007 data.')
-path_hb <- str_c(galaxy[i],"/lis_hb.res") #creates path to H-beta and [OIII] data file for each galaxy.
+path_hb <- str_c(---,"/lis_hb.res") #creates path to H-beta and [OIII] data file for each galaxy.
 data3 <- read.table(path_hb, header=TRUE)
          
 ##Merge data.
@@ -244,7 +244,7 @@ rms_AHa <- f_l[1]*rms_EBV
 print('Saving fluxes to data file.')
 resume <- data.frame(ID,EBV,rms_EBV,AHa,rms_AHa,Fa,rms_Fa,Fb,rms_Fb,Fn1,rms_Fn1,Fn,rms_Fn,Fo1,rms_Fo1,Fo,rms_Fo)
 #resume <- data.frame(ID,AHa,Fa,Fb,Fn1,Fn,Fo1,Fo)
-tabla <- str_c(galaxy[i],"/Cardelli_Base_Fluxes.dat")
+tabla <- str_c(---,"/Cardelli_Base_Fluxes.dat") # Output data file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
