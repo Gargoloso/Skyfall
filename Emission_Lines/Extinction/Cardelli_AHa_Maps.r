@@ -24,9 +24,9 @@ library("png")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data.
+setwd("---") # Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) # File with general information for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
@@ -58,7 +58,7 @@ for(i in 1:length(galaxy)){
   ##Load data
   
   print('Extracting Cardelli A(Ha) extinction.')  
-  path_ha <- str_c(galaxy[i],"/Cardelli_Base_Fluxes.dat") #creates path to Ha and [N II]data file for each galaxy
+  path_ha <- str_c(---,"/Cardelli_Base_Fluxes.dat") #creates path to Ha and [N II]data file for each galaxy
   data0 <- read.table(path_ha, header=TRUE)
   attach(data0)
   
@@ -105,9 +105,9 @@ for(i in 1:length(galaxy)){
   
   #Saving plot.
   
-  map <- str_c(galaxy[i],"/",galaxy[i],"_AHa_Map.eps")
+  map <- str_c(---,"/",galaxy[i],"_AHa_Map.eps")# Directory and name of eps saved file. 
   dev.copy2eps(file=map)
-  map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_AHa_Map.eps ",galaxy[i],"/",galaxy[i],"_AHa_Map.png")
+  map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_AHa_Map.eps ",galaxy[i],"/",galaxy[i],"_AHa_Map.png") # Convert to png, change directoy and file name accordingly.
   system(map)
 }
 
