@@ -28,9 +28,9 @@ require("stringr")
 
 ##################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) # File with general information for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
@@ -149,7 +149,7 @@ rms_Foiii4363 <-  sqrt((rms_oiii43632*10^(0.4*EBV3*k_l1))^2 + (rms_EBV3*log(10)*
 
 print('Saving fluxes to data file.')
 resume <- data.frame(ID, Foiii4363, rms_Foiii4363)
-tabla <- str_c(galaxy[i],"/Calzetti_oiii4363_Fluxes.dat")
+tabla <- str_c(---,"/Calzetti_oiii4363_Fluxes.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
