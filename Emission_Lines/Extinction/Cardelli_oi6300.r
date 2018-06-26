@@ -35,7 +35,7 @@ require("stringr")
 
 setwd("---") # Directrory with our data.
 
-data <- read.table("---", header=TRUE) # 
+data <- read.table("---", header=TRUE) # File with general information for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
