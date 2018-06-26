@@ -26,9 +26,9 @@ library("png")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) #File with general info of each galaxy.
 attach(data)
 galaxy<-as.character(name)
 
@@ -68,7 +68,7 @@ yc <- trunc(naxis2[i]/2)
 ####################################################################
 
 print('Extracting Base data') #Creates path to a file with Base results.
-pathcb <- str_c(galaxy[i],"/Calzetti_Base_Fluxes.dat")
+pathcb <- str_c(---,"/Calzetti_Base_Fluxes.dat") #Path to output of Base file with dereddened fluxes.
 data1 <- read.table(pathcb, header=TRUE) 
 attach(data1)
 
@@ -199,9 +199,9 @@ text(0.7,-1.5, label="LINER",cex=1.5) #Anomalous
 
 print('SAVING PLOT')
 
-map <- str_c(galaxy[i],"/",galaxy[i],"_BPTdiag_NII.eps")
+map <- str_c(---,"/",galaxy[i],"_BPTdiag_NII.eps")
 dev.copy2eps(file=map)
-map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_BPTdiag_NII.eps ",galaxy[i],"/",galaxy[i],"_BPTdiag_NII.png")
+map <- str_c("convert -density 300 ",---,"/",galaxy[i],"_BPTdiag_NII.eps ",---,"/",galaxy[i],"_BPTdiag_NII.png")
 system(map)
 
 ##############################################################################
@@ -237,9 +237,9 @@ abline(h = 0, v = 0, col = "gray60",lwd=2)
 
 print('SAVING PLOT')
 
-map <- str_c(galaxy[i],"/",galaxy[i],"_BPT_NII_Map.eps")
+map <- str_c(---,"/",galaxy[i],"_BPT_NII_Map.eps")
 dev.copy2eps(file=map)
-map <- str_c("convert -density 300  ",galaxy[i],"/",galaxy[i],"_BPT_NII_Map.eps ",galaxy[i],"/",galaxy[i],"_BPT_NII_Map.png")
+map <- str_c("convert -density 300  ",---,"/",galaxy[i],"_BPT_NII_Map.eps ",---,"/",galaxy[i],"_BPT_NII_Map.png")
 system(map)
 
 ##############################################################################
@@ -247,7 +247,7 @@ system(map)
 
 print('Saving line ratios and BPT types to data file.')
 resume <- data.frame(ID2, na, rms_na, ob, rms_ob, type)
-tabla <- str_c(galaxy[i],"/BPT-NII_data.dat")
+tabla <- str_c(---,"/BPT-NII_data.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 ##############################################################################
