@@ -24,9 +24,9 @@ library("png")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data.
+setwd(" ") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table(" ", header=TRUE) #File with general info of each galaxy.
 attach(data)
 
 galaxy <- as.character(name)
@@ -105,9 +105,9 @@ for(i in 1:length(galaxy)){
   
   #Saving plot.
   
-  map <- str_c(galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.eps")
+  map <- str_c(galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.eps") #Directory and name of eps saved file.
   dev.copy2eps(file=map)
-  map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.eps ",galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.png")
+  map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.eps ",galaxy[i],"/",galaxy[i],"_Calzetti_AHa_Map.png") #Convert to png, change directoy and file name accordingly.
   system(map)
 }
 
