@@ -28,9 +28,9 @@ require("stringr")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) # File with general information for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
@@ -62,11 +62,11 @@ print('****************************')
 ##Load data
   
 print('Extracting [S II] 6716,6731  data.')  
-path_sii <- str_c(galaxy[i],"/lis_sii.res") #creates path to [Ha and [S II] 6716,6731 data file for each galaxy. 
+path_sii <- str_c(---,"/lis_sii.res") #creates path to [Ha and [S II] 6716,6731 data file for each galaxy. 
 data0 <- read.table(path_sii , header=TRUE)
   
 print('Extracting Base data') #Creates path to a file with Base results.
-pathcb <- str_c(galaxy[i],"/Calzetti_Base_Fluxes.dat")
+pathcb <- str_c(---,"/Calzetti_Base_Fluxes.dat")
 data1 <- read.table(pathcb, header=TRUE) 
 
 ##Merge data
@@ -167,7 +167,7 @@ rms_Fsii2 <-  sqrt((rms_sii22*10^(0.4*EBV3*k_l2[2]))^2 + (rms_EBV3*log(10)*fsii2
 
 print('Saving fluxes to data file.')
 resume <- data.frame(ID, Fsii1, rms_Fsii1, Fsii2, rms_Fsii2)
-tabla <- str_c(galaxy[i],"/Calzetti_sii_Fluxes.dat")
+tabla <- str_c(---,"/Calzetti_sii_Fluxes.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
