@@ -33,9 +33,9 @@ require("stringr")
 
 ##################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data.
+setwd("---") # Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) # File with general information for each galaxy.
 attach(data)
 
 galaxy <- as.character(name)
@@ -67,12 +67,12 @@ print('****************************')
 ##Load data.
   
 print('Extracting [S II] 6716,6731  data.')  
-path_oi <- str_c(galaxy[i],"/lis_sii.res") #creates path to the [S II] 6716,6731 data file for each galaxy.
+path_oi <- str_c(---,"/lis_sii.res") #creates path to the [S II] 6716,6731 data file for each galaxy.
 data0 <- read.table(path_oi, header=TRUE)
 
 
 print('Extracting complementary data.') #Creates path to a file with complementary data, from a previous run of Cardelli_Base_Fluxes.dat
-pathcb <- str_c(galaxy[i],"/Cardelli_Base_Fluxes.dat")
+pathcb <- str_c(---,"/Cardelli_Base_Fluxes.dat")
 data1 <- read.table(pathcb, header=TRUE) 
 
 
@@ -175,7 +175,7 @@ rms_Fsii2 <-  sqrt((rms_sii22*10^(0.4*EBV3*f_l[2]))^2 + (rms_EBV3*log(10)*fsii22
 
 print('Saving fluxes to data file.')
 resume <- data.frame(ID, Fsii1, rms_sii1, Fsii2, rms_Fsii2)
-tabla <- str_c(galaxy[i],"/Cardelli_sii1_Fluxes.dat")
+tabla <- str_c(---,"/Cardelli_sii1_Fluxes.dat") # Output data file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
