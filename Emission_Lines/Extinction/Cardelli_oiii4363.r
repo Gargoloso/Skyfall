@@ -22,7 +22,7 @@
 #############################################################################
 
 ##Clean the workspace.
-rm(list=ls(all=TRUE))
+rm(list=ls(all=TRUE)) 
 
 ##Libraries.
 require("stringr")
