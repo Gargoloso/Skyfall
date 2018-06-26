@@ -32,7 +32,7 @@ data <- read.table("---", header=TRUE) #File with general info of each galaxy.
 attach(data)
 galaxy<-as.character(name)
 
-
+ 
 ####################################################################
 ####################################################################
 
