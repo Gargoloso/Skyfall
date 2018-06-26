@@ -29,9 +29,9 @@ require("stringr")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("---") #Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("---", header=TRUE) #File with general information for all galaxies.
 attach(data)
 
 galaxy <- as.character(name)
@@ -63,7 +63,7 @@ print('****************************')
 ##Load data
   
 print('Extracting [O I] 6300  data.')  
-path_oi <- str_c(galaxy[i],"/lis_oi6300.res") #creates path to [O I] 6300 data file for each galaxy.
+path_oi <- str_c(---],"/lis_oi6300.res") #creates path to [O I] 6300 data file for each galaxy.
 data0 <- read.table(path_oi, header=TRUE)
   
 print('Extracting Base data') #Creates path to a file with Base results.
@@ -152,7 +152,7 @@ rms_Foi6300 <-  sqrt((rms_oi63002*10^(0.4*EBV3*k_l2))^2 + (rms_EBV3*log(10)*foi6
 
 print('Saving fluxes to data file.')
 resume <- data.frame(ID, Foi6300, rms_Foi6300)
-tabla <- str_c(galaxy[i],"/Calzetti_oi6300_Fluxes.dat")
+tabla <- str_c(---,"/Calzetti_oi6300_Fluxes.dat") # Path to output file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
