@@ -175,7 +175,7 @@ rms_Fsii2 <-  sqrt((rms_sii22*10^(0.4*EBV3*f_l[2]))^2 + (rms_EBV3*log(10)*fsii22
 
 print('Saving fluxes to data file.')
 resume <- data.frame(ID, Fsii1, rms_sii1, Fsii2, rms_Fsii2)
-tabla <- str_c(---,"/Cardelli_sii1_Fluxes.dat") # Output data file.
+tabla <- str_c(---,"/Cardelli_sii_Fluxes.dat") # Output data file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 }
