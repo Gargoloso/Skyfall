@@ -24,9 +24,9 @@ library("png")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") # Directrory with our data.
+setwd("---") # Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE) # File with general information for all galaxies.
+data <- read.table("---", header=TRUE) # File with general information for all galaxies.
 attach(data)
 galaxy<-as.character(name)
 
@@ -65,10 +65,10 @@ yc <- trunc(naxis2[i]/2)
 
 ##Load data
 
-path_base <- str_c(galaxy[i],'/Calzetti_Base_Fluxes.dat') #creates path to Ha and [N II]data file for each galaxy
+path_base <- str_c(---,'/Calzetti_Base_Fluxes.dat') #creates path to Ha and [N II]data file for each galaxy
 data0 <- read.table(path_base, header=TRUE)
 
-path_sii <- str_c(galaxy[i],"/Calzetti_sii_Fluxes.dat") #creates path to Ha and [S II]data file for each galaxy
+path_sii <- str_c(---,"/Calzetti_sii_Fluxes.dat") #creates path to Ha and [S II]data file for each galaxy
 data1 <- read.table(path_sii, header=TRUE)
 
 ##Merge data
@@ -190,9 +190,9 @@ text(0.8,-1.5, label="Anomalous",cex=1.5)
 
 print('SAVING PLOT')
 
-map <- str_c(galaxy[i],"/",galaxy[i],"_BPTdiag_SII.eps")
+map <- str_c(---,"/",galaxy[i],"_BPT_SII_Diag.eps")
 dev.copy2eps(file=map)
-map <- str_c("convert -density 300 ",galaxy[i],"/",galaxy[i],"_BPTdiag_SII.eps ",galaxy[i],"/",galaxy[i],"_BPTdiag_SII.png")
+map <- str_c("convert -density 300 ",---,"/",galaxy[i],"_BPT_SII_Diag.eps ",---,"/",galaxy[i],"_BPT_SII_Diag.png")
 system(map)
 
 ##############################################################################
@@ -227,9 +227,9 @@ abline(h = 0, v = 0, col = "gray60",lwd=2)
 
 print('SAVING PLOT')
 
-map <- str_c(galaxy[i],"/",galaxy[i],"_BPT_SII_Map.eps")
+map <- str_c(---,"/",galaxy[i],"_BPT_SII_Map.eps")
 dev.copy2eps(file=map)
-map <- str_c("convert -density 300  ",galaxy[i],"/",galaxy[i],"_BPT_SII_Map.eps ",galaxy[i],"/",galaxy[i],"_BPT_SII_Map.png")
+map <- str_c("convert -density 300  ",---,"/",galaxy[i],"_BPT_SII_Map.eps ",---,"/",galaxy[i],"_BPT_SII_Map.png")
 system(map)
 
 ##############################################################################
@@ -237,7 +237,7 @@ system(map)
 
 print('Saving line ratios and BPT types to data file.')
 resume <- data.frame(ID2, sa, rms_sa, ob, rms_ob, type)
-tabla <- str_c(galaxy[i],"/BPT-SII_data.dat")
+tabla <- str_c(---,"/BPT-SII_data.dat") # Save output to data file.
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
 ##############################################################################
@@ -254,7 +254,7 @@ tot[i] <- nSy[i] + nSF[i] + nAn[i]
 ##Save summary data to a file.
 
 Cuentas <- data.frame(galaxy,nSy,nSF,nAn, tot)
-tabla <- str_c('BPT-SII_SpaxCount.dat')
+tabla <- str_c('BPT-SII_SpaxCount.dat') 
 write.table(Cuentas, tabla, sep="\t",quote=FALSE)
 
 
