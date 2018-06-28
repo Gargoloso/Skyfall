@@ -17,7 +17,6 @@ rm(list=ls(all=TRUE))
 ##Libraries
 require("stringr")
 library("png")
-#library("MASS")
 
 
 ########################################################################
@@ -26,9 +25,9 @@ library("png")
 
 ########################################################################
 
-setwd("~/Rings/ringed_work/") #Directrory with our data
+setwd("~/Rings/ringed_work/") # Directrory with our data.
 
-data <- read.table("lis.dat", header=TRUE)
+data <- read.table("lis.dat", header=TRUE) #File with general information for all galaxies.
 attach(data)
 galaxy<-as.character(name)
 
