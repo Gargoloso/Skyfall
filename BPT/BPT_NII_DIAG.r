@@ -3,10 +3,8 @@
 
 
 ##	This programs finds draws BPT diagrams  and maps for all galaxies. ##
-
-##	02/23/2017 by A. Robleto-Orus                                      ##
-##  05/25/2018 adapted for new generation (Skyfall) scripts with error ##
-##             propagation.                                            ##
+                                        
+##  07/02/2018 by A. Robleto-Orús                                      ##
 
 #########################################################################
 #########################################################################
