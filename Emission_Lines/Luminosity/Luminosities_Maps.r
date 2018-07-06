@@ -148,64 +148,79 @@ D <- d*3.0857e24 #Distance (cm)
 ## H-alpha luminosity
 
 print('Determining H-alpha luminosity.')
-La1 <- 4*pi*D^2*fa*2.3504e-11 #Luminosity [erg s^-1 ].
+LA1 <- 4*pi*D^2*fa*2.3504e-11 #Luminosity [erg s^-1 ].
 
 ## H-beta Luminosity
 
 print('Determining H-beta luminosity.')
-Lb1 <- 4*pi*D^2*fb*2.3504e-11 #Luminosity [erg s^-1 ].
+LB1 <- 4*pi*D^2*fb*2.3504e-11 #Luminosity [erg s^-1 ].
 
 ## [O III] 4959 luminosity
 
 print('Determining [O III] 4959 luminosity.')
-Lo11 <- 4*pi*D^2*fo1*2.3504e-11 #Luminosity [erg s^-1 ].
+LO11 <- 4*pi*D^2*fo1*2.3504e-11 #Luminosity [erg s^-1 ].
 
 ## [O III] 5007 luminosity
 
 print('Determining [O III] 5007 luminosity.')
-Lo1 <- 4*pi*D^2*fo*2.3504e-11 #Luminosity [erg s^-1 ].
+LO1 <- 4*pi*D^2*fo*2.3504e-11 #Luminosity [erg s^-1 ].
 
 ## [N II] 6548
 
 print('Determining [N II] 6548 luminosity.')
-Ln11 <- 4*pi*D^2*fn1*2.3504e-11 #Luminosity [erg s^-1 ].
+LN11 <- 4*pi*D^2*fn1*2.3504e-11 #Luminosity [erg s^-1 ].
 
 ## [N II] 6583
 
 print('Determining [N II] 6583 luminosity.')
-Ln1 <- 4*pi*D^2*Fn*2.3504e-11 #Luminosity [erg s^-1 ].
+LN1 <- 4*pi*D^2*Fn*2.3504e-11 #Luminosity [erg s^-1 ].
 
-# Fitering out NAs.
+#########################################       MAPS ONLY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+#removing inferior quartile.
+remove_outliers <- function(x, na.rm=TRUE, ...){
+  qnt <- quantile(x, probs=c(.25,.99, na.rm = na.rm, ...))
+  H <- 1.5*IQR(x, na.rm = na.rm)
+  clean <- x
+  clean[x < (qnt[1] - H)] <- NA
+  clean[x > (qnt[2] + H)] <- NA
+  clean
+}
 
-La  <- La1[which(!is.na(La1))]
-Xa  <- X[which(!is.na(La1))]
-Ya  <- Y[which(!is.na(La1))]
-IDa <- ID2[which(!is.na(La1))]
+LA2 <- 10^(remove_outliers(log10(LA1)))
+La  <- LA2[which(!is.na(LA2))]/3.826e33 #Convert to Solar luminosity.
+Xa  <- X[which(!is.na(LA2))]
+Ya  <- Y[which(!is.na(LA2))]
+IDa <- ID2[which(!is.na(LA2))]
 
-Ln1  <- Ln11[which(!is.na(Ln11))]
-Xn1  <- X[which(!is.na(Ln11))]
-Yn1  <- Y[which(!is.na(Ln11))]
-IDn1 <- ID2[which(!is.na(Ln11))]
+LN112 <- 10^(remove_outliers(log10(LN11)))
+Ln1  <- LN112[which(!is.na(LN112))]/3.826e33 #Convert to Solar luminosity.
+Xn1  <- X[which(!is.na(LN112))]
+Yn1  <- Y[which(!is.na(LN112))]
+IDn1 <- ID2[which(!is.na(LN112))]
 
-Ln  <- Ln1[which(!is.na(Ln1))]
-Xn  <- X[which(!is.na(Ln1))]
-Yn  <- Y[which(!is.na(Ln1))]
-IDn <- ID2[which(!is.na(Ln1))]
+LN12 <- 10^(remove_outliers(log10(LN1)))
+Ln  <- LN12[which(!is.na(LN12))]/3.826e33 #Convert to Solar luminosity.
+Xn  <- X[which(!is.na(LN12))]
+Yn  <- Y[which(!is.na(LN12))]
+IDn <- ID2[which(!is.na(LN12))]
 
-Lb  <- Lb1[which(!is.na(Lb1))]
-Xb  <- X[which(!is.na(Lb1))]
-Yb  <- Y[which(!is.na(Lb1))]
-IDb <- ID2[which(!is.na(Lb1))]
+LB2 <- 10^(remove_outliers(log10(LB1)))
+Lb  <- LB2[which(!is.na(LB2))]/3.826e33 #Convert to Solar luminosity.
+Xb  <- X[which(!is.na(LB2))]
+Yb  <- Y[which(!is.na(LB2))]
+IDb <- ID2[which(!is.na(LB2))]
 
-Lo1  <- Lo11[which(!is.na(Lo11))]
-Xo1  <- X[which(!is.na(Lo11))]
-Yo1  <- Y[which(!is.na(Lo11))]
-IDo1 <- ID2[which(!is.na(Lo11))]
+LO112 <- 10^(remove_outliers(log10(LO11)))
+Lo1  <- LO112[which(!is.na(LO112))]/3.826e33 #Convert to Solar luminosity.
+Xo1  <- X[which(!is.na(LO112))]
+Yo1  <- Y[which(!is.na(LO112))]
+IDo1 <- ID2[which(!is.na(LO112))]
 
-Lo  <- Lo1[which(!is.na(Lo1))]
-Xo  <- X[which(!is.na(Lo1))]
-Yo  <- Y[which(!is.na(Lo1))]
-IDo <- ID2[which(!is.na(Lo1))]
+LO2 <- 10^(remove_outliers(log10(LO1)))
+Lo  <- LO2[which(!is.na(LO2))]/3.826e33 #Convert to Solar luminosity.
+Xo  <- X[which(!is.na(LO2))]
+Yo  <- Y[which(!is.na(LO2))]
+IDo <- ID2[which(!is.na(LO2))]
 
 
 ##########################################################################
@@ -232,16 +247,17 @@ print('Plotting H-alpha luminosity map.')
 
 ## Specify color map for z.
 
-rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
-Col <- rbPal(100)[as.numeric(cut(log10(La[which(La >= 1e25)]),breaks = 100))]
-
-plot(Xa[which(La >= 1e25)],Ya[which(La >= 1e25)],xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = expression(paste(galaxy[i]," H",alpha," luminosity")),xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
+rbPal <-  colorRampPalette(rev(rainbow(100,start=0,end=0.7))) 
+Col <- rbPal(100)[as.numeric(cut(log10(La),breaks = 100))]
+#[which(La >= 1e3)]
+title <- str_c(galaxy[i]," H-alpha luminosity")
+plot(Xa,Ya,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = title,xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
 #rasterImage(ima,-40,-40,40,40,interpolate=F)
-points(Xa[which(La >= 1e25)],Ya[which(La >= 1e25)], col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
+points(Xa,Ya, col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
 grid() #Coordinates'grid.
 abline(h = 0, v = 0, col = "gray60",lwd=2)
 #mtext(side=3,expression(paste(" log"[10]," H",alpha," Luminosity [erg s"^-1,"]")))
-image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(La[which(La >= 1e25)])), col = ((rainbow(100,start=0,end=0.9)))) #Plots the color bar. Reverse colors here too.
+image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(La)), col = (rev(rainbow(100,start=0,end=0.7)))) #Plots the color bar. Reverse colors here too.
 
 #Saving plot.
 
@@ -258,17 +274,17 @@ print('Plotting [O III] 5007 luminosity map.')
 
 ## Specify color map for z.
 
-rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
-Col <- rbPal(100)[as.numeric(cut(log10(Lo[which(Lo >= 1e25)]),breaks = 100))]
-
-
-plot(Xo[which(Lo >= 1e25)],Yo[which(Lo >= 1e25)],xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = expression(paste(galaxy[i]," [O III] ",lambda,"5007 luminosity")),xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
+rbPal <-  colorRampPalette(rev(rainbow(100,start=0,end=0.7))) 
+Col <- rbPal(100)[as.numeric(cut(log10(Lo),breaks = 100))]
+#[which(Lo >= 1e-5)]
+title <- str_c(galaxy[i]," [O III] 5007 luminosity")
+plot(Xo,Yo,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = title,xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
 #rasterImage(ima,-40,-40,40,40,interpolate=F)
-points(Xo[which(Lo >= 1e25)],Yo[which(Lo >= 1e25)], col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
+points(Xo,Yo, col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
 grid() #Coordinates'grid.
 abline(h = 0, v = 0, col = "gray60",lwd=2)
 #mtext(side=3, expression(paste(" log"[10]," [O III] ",lambda,"5007 Luminosity [erg s"^-1,"]")))
-image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Lo[which(Lo >= 1e25)])), col = ((rainbow(100,start=0,end=0.9)))) #Plots the color bar. Reverse colors here too.
+image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Lo)), col = (rev(rainbow(100,start=0,end=0.7)))) #Plots the color bar. Reverse colors here too.
 
 #Saving plot.
 
@@ -284,16 +300,17 @@ print('Plotting [N II] 6583 luminosity map.')
 
 ## Specify color map for z.
 
-rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
-Col <- rbPal(100)[as.numeric(cut(log10(Ln[which(Ln >= 1e25)]),breaks = 100))]
-
-plot(Xn[which(Ln >= 1e25)],Yn[which(Ln >= 1e25)],xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main=expression(paste(galaxy[i]," [N II] ",lambda,"6583 luminosity")), xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
+rbPal <-  colorRampPalette(rev(rainbow(100,start=0,end=0.7))) 
+Col <- rbPal(100)[as.numeric(cut(log10(Ln),breaks = 100))]
+#[which(Ln >= 1e-8 & Ln <=1e-4)]
+title <- str_c(galaxy[i]," [N II] 6583 luminosity")
+plot(Xn,Yn,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main= title, xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
 #rasterImage(ima,-40,-40,40,40,interpolate=F)
-points(Xn[which(Ln >= 1e25)],Yn[which(Ln >= 1e25)], col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
+points(Xn,Yn, col = (Col), pch=15,cex = 0.7) #Plots spaxels with color map reversed (to have greater values darker and lower lighter).
 grid() #Coordinates'grid.
 abline(h = 0, v = 0, col = "gray60",lwd=2)
 #mtext(side=3,expression(paste(" log"[10]," [N II] ",lambda," 6584 Luminosity [erg s"^-1,"]")))
-image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Ln[which(Ln >= 1e25)])), col = ((rainbow(100,start=0,end=0.9)))) #Plots the color bar. Reverse colors here too.
+image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Ln)), col = (rev(rainbow(100,start=0,end=0.7)))) #Plots the color bar. Reverse colors here too.
 
 #Saving plot.
 
@@ -309,7 +326,7 @@ image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Ln[which(Ln >= 1e25)])
 
 ## Specify color map for z.
 
-#rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
+#rbPal <-  colorRampPalette(rev(rainbow(100,start=0,end=0.7))) 
 #Col <- rbPal(100)[as.numeric(cut(log10(EWa),breaks = 100))]
 
 #plot(X3,Y3,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main=galaxy[i], xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
@@ -318,7 +335,7 @@ image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(Ln[which(Ln >= 1e25)])
 #grid() #Coordinates'grid.
 #abline(h = 0, v = 0, col = "gray60",lwd=2)
 #mtext(side=3,expression(paste(" log"[10]," [N II] ",lambda," 6584 Luminosity [erg s"^-1,"]")))
-#image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(EWa)), col = ((rainbow(100,start=0,end=0.9)))) #Plots the color bar. Reverse colors here too.
+#image.plot( -40, -40, legend.only=TRUE, zlim= range(log10(EWa)), col = (rev(rainbow(100,start=0,end=0.7)))) #Plots the color bar. Reverse colors here too.
 
 #Saving plot.
 
