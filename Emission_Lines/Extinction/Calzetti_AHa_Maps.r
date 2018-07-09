@@ -90,7 +90,7 @@ for(i in 1:length(galaxy)){
   
   ## Specify color map for z.
   
-  rbPal <-  colorRampPalette((rainbow(100,start=0,end=0.9))) 
+  rbPal <-  colorRampPalette(rev(rainbow(100,start=0,end=0.7))) 
   Col <- rbPal(100)[as.numeric(cut(Calzetti_AHa,breaks = 100))]
   
   plot(x2,y2,xlim=c(-40,40),ylim=c(-40,40),xaxs= "i",yaxs="i", col="white", main = galaxy[i],xlab = expression(paste(Delta, alpha," (arcsec)")), ylab = expression(paste(Delta, delta," (arcsec)")), cex.lab=1.3, cex.axis=1.3)
@@ -99,7 +99,7 @@ for(i in 1:length(galaxy)){
   grid() #Coordinates'grid.
   abline(h = 0, v = 0, col = "gray60",lwd=2)
   #mtext(side=3,expression(paste(" log"[10]," H",alpha," Luminosity [erg s"^-1,"]")))
-  image.plot( -40, -40, legend.only=TRUE, zlim= range(Calzetti_AHa), col = ((rainbow(100,start=0,end=0.9)))) #Plots the color bar. Reverse colors here too.
+  image.plot( -40, -40, legend.only=TRUE, zlim= range(Calzetti_AHa), col = (rev(rainbow(100,start=0,end=0.7)))) #Plots the color bar. Reverse colors here too.
   
   
   

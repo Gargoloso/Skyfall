@@ -124,17 +124,18 @@ ob1 <- log10(FO/FB)
 rms_ob2 <- sqrt(((1/FB)*rms_FO)^2 + ((-FO/(FB^2))*rms_FB)^2)
 rms_ob3 <- log10(rms_ob2)
 
-## Filtering out NAs.
+## Filtering out NAs and relative errors >=1.
 
-na     <- na1[which(!is.na(na1) & !is.na(ob1))]
-rms_na <- rms_na3[which(!is.na(na1) & !is.na(ob1))]
+na     <- na1[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
+rms_na <- rms_na3[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
 
-ob     <- ob1[which(!is.na(na1) & !is.na(ob1))]
-rms_ob <- rms_ob3[which(!is.na(na1) & !is.na(ob1))]
+ob     <- ob1[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
+rms_ob <- rms_ob3[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
 
-X2 <- X[which(!is.na(na1) & !is.na(ob1))]
-Y2 <- Y[which(!is.na(na1) & !is.na(ob1))]
+X2 <- X[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
+Y2 <- Y[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
 
+ID3 <- ID2[which(!is.na(na1) & !is.na(ob1) & (rms_na2/(FN/FA)) <= 1 & (rms_ob2/(FO/FB)) <= 1)]
 
 ########################################################################
 
@@ -243,7 +244,7 @@ system(map)
 ##Save data to files.
 
 print('Saving line ratios and BPT types to data file.')
-resume <- data.frame(ID2, na, rms_na, ob, rms_ob, type)
+resume <- data.frame(ID3, na, rms_na, ob, rms_ob, type)
 tabla <- str_c(galaxy[i],"/BPT-NII_data.dat")
 write.table(resume, tabla, sep="\t",quote=FALSE)
 
